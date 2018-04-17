@@ -11,10 +11,10 @@ namespace CommandPatternClient
         static void Main(string[] args)
         {
             // Control the light
-            var remote = new RemoteController();
-            var light = new Light();
-            var lightOn = new LightOnCommand(light);
-            var lightOff = new LightOffCommand(light);
+            var remote = new RemoteController();        // Invoker
+            var light = new Light();                    // Receiver
+            var lightOn = new LightOnCommand(light);    // Command
+            var lightOff = new LightOffCommand(light);  // Command
 
             remote.SetCommand(lightOn);
             remote.ActivateCommand();
@@ -22,10 +22,11 @@ namespace CommandPatternClient
             remote.ActivateCommand();
 
             // Control the garage door
-            var garageDoor = new GarageDoor();
-            var doorUp = new GarageDoorUpCommand(garageDoor);
-            var doorDown = new GarageDoorDownCommand(garageDoor);
+            var garageDoor = new GarageDoor();                      // Receiver
+            var doorUp = new GarageDoorUpCommand(garageDoor);       // Command
+            var doorDown = new GarageDoorDownCommand(garageDoor);   // Command
 
+            // Invoker ---> Command ----> Receiver
             remote.SetCommand(doorUp);
             remote.ActivateCommand();
             remote.SetCommand(doorDown);
